@@ -1,0 +1,66 @@
+server:
+  port: ${PORT:9001}
+
+spring:
+  cloud:
+    openservicebroker:
+      catalog:
+        services:
+        
+        # Service A
+        - id: 6311aa10-6577-48d2-8553-2812e4ebb247
+          name: Service-A
+          description: A simple service A.
+          bindable: true
+          plan-updateable: false
+          instances-retrievable: true
+          bindings-retrievable: true
+          metadata:
+            display-name:       Service A
+            documentation-url:  https://en.wikipedia.org/wiki/Documentation
+            support-url:        https://en.wikipedia.org/wiki/Support
+            long-description:   A long description of Service A.
+            image-url-resource: serviceA.png
+          tags:
+          - service-a
+          - sample-service
+          - cloud-foundry
+          plans:
+          - id: 401beae4-4e37-40eb-a9d4-fffbbbe6bb27
+            name: small
+            description: A small-sized service version
+          - id: 9eb91c55-b01e-4baa-807d-c10227c75daf
+            name: medium
+            description: A medium-sized service version
+          - id: 644a92d2-bc8a-4663-aa93-b56afe947bad
+            name: large
+            description: A large-sized service version
+
+        # Service B
+        - id: 5eca48be-dcb9-4b99-9c81-cd714d452125
+          name: Service-B
+          description: A simple service B.
+          bindable: true
+          plan-updateable: false
+          instances-retrievable: true
+          bindings-retrievable: true
+          metadata:
+            display-name:       Service B
+            documentation-url:  https://en.wikipedia.org/wiki/Documentation
+            support-url:        https://en.wikipedia.org/wiki/Support
+            long-description:   A long description of Service B.
+            image-url-resource: serviceB.png
+          tags:
+          - service-b
+          - sample-service
+          - cloud-foundry
+          plans:
+          - id: 508e8d88-7ec2-40e8-b350-387f98877eb0
+            name: small
+            description: A small-sized service version
+          - id: d96963d2-c260-4518-913c-d3256399cf79
+            name: medium
+            description: A medium-sized service version
+          - id: fb24bcac-3057-4c76-9fd9-304870c8d449
+            name: large
+            description: A large-sized service version

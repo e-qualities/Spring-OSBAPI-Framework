@@ -1,0 +1,2 @@
+# For Mongo DB, the defaults of Spring Data MongoDB are sufficient.
+# For customizations see: https://spring.io/projects/spring-data-mongodb

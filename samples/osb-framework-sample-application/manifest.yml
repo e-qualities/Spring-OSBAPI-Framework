@@ -1,0 +1,23 @@
+---
+applications:
+  - name: ((service-name))
+    memory: 1024M
+    disk_quota: 512M
+    instances: 1
+    timeout: 180
+    buildpacks:
+      - java_buildpack
+    path: ((service-binary-path))
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+
+    routes:
+      - route: ((service-route-host)).((cf-domain))
+      
+    services:
+      - ((postgres-instance-name))
+
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
+      postgres-instance-name: ((postgres-instance-name))
+      SPRING_PROFILES_ACTIVE: cloud,postgresql

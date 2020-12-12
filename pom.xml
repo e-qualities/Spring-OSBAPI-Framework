@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.4.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>com.equalities.cloud</groupId>
+  <artifactId>spring-osbapi-parent</artifactId>
+  <version>${revision}</version>
+  <packaging>pom</packaging>
+
+  <name>spring-osbapi-parent</name>
+  <description>Parent POM for Spring OSB Library projects</description>
+
+  <properties>
+    <revision>0.0.1-SNAPSHOT</revision>
+    <java.version>11</java.version>
+    <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+    <maven-pmd-plugin.version>3.13.0</maven-pmd-plugin.version>
+    <findbugs-maven-plugin.version>3.0.5</findbugs-maven-plugin.version>
+    <slf4j-test.version>1.2.0</slf4j-test.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+  </properties>
+
+  <modules>
+    <module>spring-osbapi-framework</module>
+    <module>spring-osbapi-autoconfigure</module>
+    <module>spring-osbapi-persistence-api</module>
+    <module>spring-osbapi-persistence-inmemory</module>
+    <module>spring-osbapi-persistence-mongodb</module>
+    <module>spring-osbapi-persistence-jpa</module>
+    <module>spring-osbapi-starters/spring-osbapi-inmemory-springboot-starter</module>
+    <module>spring-osbapi-starters/spring-osbapi-mongodb-springboot-starter</module>
+    <module>spring-osbapi-starters/spring-osbapi-jpa-springboot-starter</module>
+    <module>samples/plain-osb-sample-application</module>
+    <module>samples/osb-framework-sample-application</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-open-service-broker</artifactId>
+        <version>3.1.1.RELEASE</version>
+      </dependency>
+
+      <!-- Test Dependency to test SLF4J log output -->
+      <dependency>
+        <groupId>uk.org.lidalia</groupId>
+        <artifactId>slf4j-test</artifactId>
+        <version>${slf4j-test.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <!-- Plugins inherited by all sub modules -->
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
+  
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+            <compilerArgument>-Xlint:all</compilerArgument>
+            <compilerArgument>-Xlint:-processing</compilerArgument>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>${maven-pmd-plugin.version}</version>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>pmd</goal>
+                <goal>cpd</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>${findbugs-maven-plugin.version}</version>
+          <executions>
+            <execution>
+              <phase>verify</phase>
+              <goals>
+                <goal>findbugs</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Flatten Maven Plugin. Mandatory when using ${revision} syntax 
+          for versions. -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.2.2</version>
+          <configuration>
+            <updatePomFile>true</updatePomFile>
+            <flattenMode>resolveCiFriendliesOnly</flattenMode>
+          </configuration>
+          <executions>
+            <execution>
+              <id>flatten</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>flatten</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>flatten.clean</id>
+              <phase>clean</phase>
+              <goals>
+                <goal>clean</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- Test report plugin configurations. -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <!-- 
+            Config to support SLF4J-Test properly. This effectively removes
+            the Slf4J API implementation provided by logback-classic from the 
+            test classpath. Instead a (test only) dependency to uk.org.lidalia:slf4j-test 
+            was added to each project executing tests. This dependency can be used to test
+            log output, and additionally it avoids littering tests output with logging statements
+            or expected exception stack traces.
+            See: http://projects.lidalia.org.uk/slf4j-test/index.html 
+            See: https://stackoverflow.com/questions/12053316/exclude-maven-dependency-for-tests 
+          -->
+          <configuration>
+            <classpathDependencyExcludes>
+              <classpathDependencyExcludes>ch.qos.logback:logback-classic</classpathDependencyExcludes>
+            </classpathDependencyExcludes>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

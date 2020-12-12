@@ -1,0 +1,936 @@
+{
+	"info": {
+		"_postman_id": "25713e9b-0116-4988-a2d4-36237837a913",
+		"name": "OSBAPI Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Service Instance Requests",
+			"item": [
+				{
+					"name": "Create Service Instance Request (Asynchronous)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6d9fdf0b-7989-455f-93ca-72157495f5e3",
+								"exec": [
+									"let response = pm.response.json();",
+									"let operationId = response.operation;",
+									"",
+									"console.log(\"Setting collection variable - operation-id: \" + operationId);",
+									"",
+									"pm.collectionVariables.set(\"operation-id\", operationId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": \"{{service-id}}\",\n  \"plan_id\": \"{{plan-id}}\",\n  \"context\": {\n    \"platform\": \"cloudfoundry\",\n    \"some_field\": \"some-contextual-data\"\n  },\n  \"organization_guid\": \"some-fancy-org\",\n  \"space_guid\": \"some-fancy-space-id\",\n  \"parameters\": {\n    \"parameter1\": \"foo\",\n    \"parameter2\": \"bar\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}?accepts_incomplete=true",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}"
+							],
+							"query": [
+								{
+									"key": "accepts_incomplete",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Service Instance Request (Synchronous)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": \"{{service-id}}\",\n  \"plan_id\": \"{{plan-id}}\",\n  \"context\": {\n    \"platform\": \"cloudfoundry\",\n    \"some_field\": \"some-contextual-data\"\n  },\n  \"organization_guid\": \"some-fancy-org\",\n  \"space_guid\": \"some-fancy-space-id\",\n  \"parameters\": {\n    \"parameter1\": \"foo\",\n    \"parameter2\": \"bar\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}?accepts_incomplete=false",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}"
+							],
+							"query": [
+								{
+									"key": "accepts_incomplete",
+									"value": "false"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Instance Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}?service_id={{service-id}}&plan_id={{plan-id}}",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service Instance Request (Asynchronous)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5bc7640-ef92-49d9-8962-d1ef358b06c2",
+								"exec": [
+									"let response = pm.response.json();",
+									"let operationId = response.operation;",
+									"",
+									"console.log(\"Setting collection variable - operation-id: \" + operationId);",
+									"",
+									"pm.collectionVariables.set(\"operation-id\", operationId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}?service_id={{service-id}}&plan_id={{plan-id}}&accepts_incomplete=true",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								},
+								{
+									"key": "accepts_incomplete",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service Instance Request (Synchronous)",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}?service_id={{service-id}}&plan_id={{plan-id}}&accepts_incomplete=false",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								},
+								{
+									"key": "accepts_incomplete",
+									"value": "false"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Last Service Instance Operation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": \"com.equalities.sample.serviceA\",\n  \"plan_id\": \"com.equalities.sample.serviceA.small\",\n  \"context\": {\n    \"platform\": \"cloudfoundry\",\n    \"some_field\": \"some-contextual-data\"\n  },\n  \"organization_guid\": \"some-fancy-org\",\n  \"space_guid\": \"some-fancy-space-id\",\n  \"parameters\": {\n    \"parameter1\": \"foo\",\n    \"parameter2\": \"bar\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}/last_operation?service_id={{service-id}}&plan_id={{plan-id}}&operation={{operation-id}}",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"last_operation"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								},
+								{
+									"key": "operation",
+									"value": "{{operation-id}}"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Service Instance Binding Requests",
+			"item": [
+				{
+					"name": "Create Service Instance Binding Request (Asynchronous)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a41746f7-f2af-4415-9c2a-e714c451d827",
+								"exec": [
+									"let response = pm.response.json();",
+									"let operationId = response.operation;",
+									"",
+									"console.log(\"Setting collection variable - operation-id: \" + operationId);",
+									"",
+									"pm.collectionVariables.set(\"binding-operation-id\", operationId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": \"{{service-id}}\",\n  \"plan_id\": \"{{plan-id}}\",\n  \"context\": {\n    \"platform\": \"cloudfoundry\",\n    \"some_field\": \"some-contextual-data\"\n  },\n  \"parameters\": {\n    \"parameter1\": \"foo\",\n    \"parameter2\": \"bar\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}/service_bindings/{{service-instance-binding-id}}?accepts_incomplete=true",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"service_bindings",
+								"{{service-instance-binding-id}}"
+							],
+							"query": [
+								{
+									"key": "accepts_incomplete",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Service Instance Binding Request (Synchronous)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "09fb88d9-50b3-4931-a540-df1de3fd4d50",
+								"exec": [
+									"let response = pm.response.json;",
+									"let operationId = response.operation;",
+									"pm.collectionVariables.set(\"operationId\", operationId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": \"{{service-id}}\",\n  \"plan_id\": \"{{plan-id}}\",\n  \"context\": {\n    \"platform\": \"cloudfoundry\",\n    \"some_field\": \"some-contextual-data\"\n  },\n  \"parameters\": {\n    \"parameter1\": \"foo\",\n    \"parameter2\": \"bar\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}/service_bindings/{{service-instance-binding-id}}?accepts_incomplete=false",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"service_bindings",
+								"{{service-instance-binding-id}}"
+							],
+							"query": [
+								{
+									"key": "accepts_incomplete",
+									"value": "false"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service Instance Binding Request",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}/service_bindings/{{service-instance-binding-id}}?service_id={{service-id}}&plan_id={{plan-id}}",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"service_bindings",
+								"{{service-instance-binding-id}}"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service Instance Binding Request (Asynchronous)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c1188676-c8e8-428e-92dc-6a2249f9a24d",
+								"exec": [
+									"let response = pm.response.json();",
+									"let operationId = response.operation;",
+									"",
+									"console.log(\"Setting collection variable - operation-id: \" + operationId);",
+									"",
+									"pm.collectionVariables.set(\"binding-operation-id\", operationId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}//service_bindings/{{service-instance-binding-id}}?service_id={{service-id}}&plan_id={{plan-id}}&accepts_incomplete=true",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"",
+								"service_bindings",
+								"{{service-instance-binding-id}}"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								},
+								{
+									"key": "accepts_incomplete",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service Instance Binding Request (Synchronous)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29dca0e1-ed77-467c-a0f6-30663755f7bd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}//service_bindings/{{service-instance-binding-id}}?service_id={{service-id}}&plan_id={{plan-id}}&accepts_incomplete=false",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"",
+								"service_bindings",
+								"{{service-instance-binding-id}}"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								},
+								{
+									"key": "accepts_incomplete",
+									"value": "false"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Last Service Instance Binding Operation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "test1234",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "ServiceBrokerUser",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-CSRF-TOKEN",
+								"value": "8291af39-1b72-421d-bf5f-6486e3aa45a2"
+							},
+							{
+								"key": "X-Broker-API-Version",
+								"value": "2.13"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"service_id\": \"com.equalities.sample.serviceA\",\n  \"plan_id\": \"com.equalities.sample.serviceA.small\",\n  \"context\": {\n    \"platform\": \"cloudfoundry\",\n    \"some_field\": \"some-contextual-data\"\n  },\n  \"organization_guid\": \"some-fancy-org\",\n  \"space_guid\": \"some-fancy-space-id\",\n  \"parameters\": {\n    \"parameter1\": \"foo\",\n    \"parameter2\": \"bar\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{broker-base-url}}/v2/service_instances/{{service-instance-id}}/service_bindings/{{service-instance-binding-id}}/last_operation?service_id={{service-id}}&plan_id={{plan-id}}&operation={{binding-operation-id}}",
+							"host": [
+								"{{broker-base-url}}"
+							],
+							"path": [
+								"v2",
+								"service_instances",
+								"{{service-instance-id}}",
+								"service_bindings",
+								"{{service-instance-binding-id}}",
+								"last_operation"
+							],
+							"query": [
+								{
+									"key": "service_id",
+									"value": "{{service-id}}"
+								},
+								{
+									"key": "plan_id",
+									"value": "{{plan-id}}"
+								},
+								{
+									"key": "operation",
+									"value": "{{binding-operation-id}}"
+								}
+							]
+						},
+						"description": "Service Instance Provisioning Sample Request (Async)"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "59d52559-d04b-4f9d-965e-632004441c0e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b4754479-eeb6-4998-b1c5-b20a64272e04",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "546b1c56-2016-48e4-b855-8bc49d84e8b1",
+			"key": "broker-base-url",
+			"value": "localhost:9002"
+		},
+		{
+			"id": "90a51b58-31b1-4e1e-a0f3-ab48e25534d0",
+			"key": "service-instance-id",
+			"value": "123456"
+		},
+		{
+			"id": "6a54c9f6-631b-41fb-9fe1-59a119e2770a",
+			"key": "service-id",
+			"value": "com.equalities.sample.serviceA"
+		},
+		{
+			"id": "a464eb35-3539-4ff3-a2f6-dec40fa1680d",
+			"key": "plan-id",
+			"value": "com.equalities.sample.serviceA.small"
+		},
+		{
+			"id": "868a5d16-823b-4b88-a199-db454a7f1bd8",
+			"key": "service-instance-binding-id",
+			"value": "654321"
+		},
+		{
+			"id": "ebb4d50f-4782-4eeb-b0bf-c4d606a2a09a",
+			"key": "---------------------------------------",
+			"value": "---------------------------------------"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

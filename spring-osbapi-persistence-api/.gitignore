@@ -1,0 +1,52 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Ignore all IntelliJ files...
+.idea/*
+# ... except these:
+!.idea/runConfigurations
+!.idea/checkstyle-idea.xml
+!.idea/encodings.xml
+
+*.iml
+
+target
+*.lst
+
+/target/*
+*.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+.settings/
+.classpath
+.factorypath
+.project
+
+.gradle/
+
+#xmake
+.xmake
+gen/
+import/
+
+#JRebel
+rebel.xml

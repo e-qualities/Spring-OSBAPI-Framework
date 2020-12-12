@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
+  <local-check-config name="maven-checkstyle-plugin validate" location="file:/Users/d056076/git/Github.SAP/spring-service-broker-framework/spring-osbapi-persistence-api/checkstyle.xml" type="remote" description="maven-checkstyle-plugin configuration validate">
+    <property name="checkstyle.header.file" value="/Users/d056076/Development/Eclipse/Eclipse-jee11-workspaces/default/.metadata/.plugins/org.eclipse.core.resources/.projects/spring-osbapi-persistence-api/com.basistech.m2e.code.quality.checkstyleConfigurator/checkstyle-header-validate.txt"/>
+    <property name="checkstyle.cache.file" value="${project_loc}/target/checkstyle-cachefile"/>
+  </local-check-config>
+  <fileset name="all" enabled="true" check-config-name="Google Checks" local="false">
+    <file-match-pattern match-pattern="." include-pattern="true"/>
+  </fileset>
+</fileset-config>

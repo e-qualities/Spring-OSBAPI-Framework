@@ -1,0 +1,90 @@
+server:
+  port: ${PORT:9002}
+
+logging: 
+  level:
+    com.equalities.cloud: DEBUG
+    #org.springframework: DEBUG
+    #org.hibernate: DEBUG
+
+spring:
+  cloud:
+    openservicebroker:
+      catalog:
+        services:
+        
+        # Service A
+        - id: com.equalities.sample.serviceA
+          name: Service-A
+          description: A simple service A.
+          bindable: true
+          plan-updateable: false
+          instances-retrievable: true
+          bindings-retrievable: true
+          metadata:
+            display-name:       Service A
+            documentation-url:  https://en.wikipedia.org/wiki/Documentation
+            support-url:        https://en.wikipedia.org/wiki/Support
+            long-description:   A long description of Service A.
+            image-url-resource: serviceA.png
+          tags:
+          - service-a
+          - sample-service
+          - cloud-foundry
+          plans:
+          - id: com.equalities.sample.serviceA.small
+            name: small
+            description: A small-sized service version
+          - id: com.equalities.sample.serviceA.medium
+            name: medium
+            description: A medium-sized service version
+          - id: com.equalities.sample.serviceA.large
+            name: large
+            description: A large-sized service version
+
+        # Service B
+        - id: com.equalities.sample.serviceB
+          name: Service-B
+          description: A simple service B.
+          bindable: true
+          plan-updateable: false
+          instances-retrievable: true
+          bindings-retrievable: true
+          metadata:
+            display-name:       Service B
+            documentation-url:  https://en.wikipedia.org/wiki/Documentation
+            support-url:        https://en.wikipedia.org/wiki/Support
+            long-description:   A long description of Service B.
+            image-url-resource: serviceB.png
+          tags:
+          - service-b
+          - sample-service
+          - cloud-foundry
+          plans:
+          - id: com.equalities.sample.serviceB.small
+            name: small
+            description: A small-sized service version
+          - id: com.equalities.sample.serviceB.medium
+            name: medium
+            description: A medium-sized service version
+          - id: com.equalities.sample.serviceB.large
+            name: large
+            description: A large-sized service version
+
+com:
+  equalities:
+    osbapi:
+      service-bindings:
+        force-delete-unknown: true # Use with care. Requests to delete unknown bindings (i.e. whose ID is not known) will be removed without error.
+#        operations:
+#          cleanup-age:      "10s"              # the age an operation should have to qualify for scheduled removal / clean up. Format: 1s / 2h / 3d
+#          cleanup-all:       "*/10 * * * * *"  # CRON pattern to schedule removal of all qualifying operations.
+#          cleanup-succeeded: "*/10 * * * * *"  # CRON pattern to schedule removal of succeeded, qualifying operations.
+#          cleanup-failed:    "*/10 * * * * *"  # CRON pattern to schedule removal of failed, qualifying operations.
+      service-instances:
+        force-delete-unknown: true # Use with care. Requests to delete unknown instances (i.e. whose ID is not known) will be removed without error.
+#        operations:
+#          cleanup-age:      "10s"              # the age an operation should have to qualify for scheduled removal / clean up. Format: 1s / 2h / 3d
+#          cleanup-all:       "*/10 * * * * *"  # CRON pattern to schedule removal of all qualifying operations.
+#          cleanup-succeeded: "*/10 * * * * *"  # CRON pattern to schedule removal of succeeded, qualifying operations.
+#          cleanup-failed:    "*/10 * * * * *"  # CRON pattern to schedule removal of failed, qualifying operations.

@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active:
+    - default
+    - postgresql
+
+# Simulate VCAP_SERVICES locally
+
+# the (local) PostgreSQL instance name:
+postgres-instance-name: local-postgres-instance 
+
+# the (local) VCAP_SERVICES mock. Note that it contains the postgres-instance-name!
+vcap.services.local-postgres-instance.credentials:
+    uri:      postgresql://localhost:5432/postgres
+    username: postgres
+    password: test1234

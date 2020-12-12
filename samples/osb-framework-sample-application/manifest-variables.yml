@@ -1,0 +1,8 @@
+---
+  application-title:           "Service Broker Test Application"               # the title of this application. Used e.g. as a display name in the Cloud Cockpit subscription tile.
+  application-description:     "Service Broker Tests Application"              # A human-readable description of this application / service. Will be used as 'description' in XSUAA configuration.
+  service-binary-path:         target/osb-test-application-0.0.1-SNAPSHOT.jar  # the path to the service's Java binary. Used in manifest.yml's 'path' variable of Java backend service part.
+  service-name:                osb-test-app                                    # the name of the Java service in CF. Should be unique within CF space (e.g. prefixed with your D/I/C-user).
+  service-route-host:          osb-test-app                                    # the name to use as host part of the service's route. The route is concatenated in manifest.yml as https://((service-route-host)).((cfdomain))
+  cf-domain:                   cfapps.eu10.hana.ondemand.com                   # the landscape-specific domain to use as part of the service route
+  postgres-instance-name:      postgres-instance                               # the name of the PostgeSQL service instance

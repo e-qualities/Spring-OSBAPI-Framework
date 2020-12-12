@@ -1,0 +1,6 @@
+# Auto Configurations
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.equalities.cloud.osb.autoconfiguration.InMemoryPersistenceAutoConfiguration,\
+com.equalities.cloud.osb.autoconfiguration.MongoDbPersistenceAutoConfiguration,\
+com.equalities.cloud.osb.autoconfiguration.JPAPersistenceAutoConfiguration,\
+com.equalities.cloud.osb.autoconfiguration.OsbApiConfigAutoConfiguration

@@ -1,0 +1,18 @@
+# Spring Data JPA configuration to provide a dataSource based on PostgreSQL.
+# With JPA also other object-relational persistency technologies are supported.
+# For more information see: https://spring.io/projects/spring-data-jpa
+
+spring:
+  jpa:  
+    hibernate:  
+      # options: 
+      # - validate:     validates the schema but makes no changes
+      # - update:       updates the schema
+      # - create:       creates the schema, destroying any previous data
+      # - create-drop:  like create, but also drops the schema when the session closes (useful for testing)
+      ddl-auto: create-drop 
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:${vcap.services.${postgres-instance-name}.credentials.uri}
+    username: ${vcap.services.${postgres-instance-name}.credentials.username}
+    password: ${vcap.services.${postgres-instance-name}.credentials.password}

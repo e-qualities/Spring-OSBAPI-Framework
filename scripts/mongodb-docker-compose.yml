@@ -1,0 +1,16 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+services:
+  db:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    environment: 
+      ME_CONFIG_MONGODB_SERVER: db
+    ports:
+      - 8081:8081
